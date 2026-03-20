@@ -1,0 +1,48 @@
+# Clase base Persona
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def mostrar_info(self):
+        return f"Nombre: {self.nombre}, Edad: {self.edad}"
+
+# Clase Estudiante hereda de Persona
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, curso, notas):
+        super().__init__(nombre, edad)   # herencia de Persona
+        self.curso = curso
+        self.notas = notas               # objeto de tipo Notas
+
+    # Polimorfismo: redefinimos mostrar_info
+    def mostrar_info(self):
+        return f"Estudiante: {self.nombre}, Curso: {self.curso}, Edad: {self.edad}"
+
+# Clase Notas
+class Notas:
+    def __init__(self, n1, n2, n3):
+        self.n1 = n1
+        self.n2 = n2
+        self.n3 = n3
+
+    def calcular_promedio(self):
+        return (self.n1 + self.n2 + self.n3) / 3
+
+# Función para validar notas
+def validar_nota(nota):
+    return 0 <= nota <= 5   # ejemplo: notas entre 0 y 5
+
+# Programa principal
+if __name__ == "__main__":
+    # Crear objeto de notas
+    notas_estudiante = Notas(4.5, 3.8, 4.0)
+
+    # Crear estudiante con herencia y composición
+    estudiante1 = Estudiante("Fabian", 25, "Programacion", notas_estudiante)
+
+    # Mostrar información
+    print(estudiante1.mostrar_info())
+    print("Promedio de notas:", estudiante1.notas.calcular_promedio())
+
+    # Validar una nota
+    print("¿La nota 4.5 es válida?", validar_nota(4.5))
